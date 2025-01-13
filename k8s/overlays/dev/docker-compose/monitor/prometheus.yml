@@ -1,0 +1,9 @@
+global:
+  scrape_interval: 15s  # Frecuencia de recolección de métricas
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Puedes agregar más jobs aquí para otros servicios o aplicaciones que desees monitorear.

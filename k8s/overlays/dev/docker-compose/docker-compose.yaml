@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  frontend:
+    image: vite-web-app
+    container_name: frontend
+    networks:
+      - proxy-network
+    ports:
+      - "5173:5173"
+    restart: always
+
+  nginx-proxy-rox:
+    image: proxy-rox
+    container_name: nginx-proxy-rox
+    networks:
+      - proxy-network
+    ports:
+      - "8080:80"
+    restart: always
+
+  backend:
+    image: backend-api-local
+    container_name: backend
+    networks:
+      - proxy-network
+    ports:
+      - "5000:5000"
+    restart: always
+
+networks:
+  proxy-network:
+    driver: bridge

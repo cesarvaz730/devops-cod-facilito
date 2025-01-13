@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-app
+  labels:
+    app: frontend-app
+spec:
+  replicas: 1  # Número de réplicas
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+    metadata:
+      labels:
+        app: frontend-app
+    spec:
+      containers:
+      - name: frontend-app
+        image: cesarvazquezmaypo/frontend-app:latest  # Cambia esto por tu imagen (por ejemplo, tuusuario/frontend-app:latest)
+        ports:
+        - containerPort: 5173
+        env:  # Variables de entorno
+        - name: VITE_HOST
+          value: "0.0.0.0"
+        - name: VITE_PORT
+          value: "5173"
