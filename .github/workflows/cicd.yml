@@ -52,20 +52,26 @@ jobs:
     needs: build-and-push
   
     steps:
-    - name: Checkout
+    # 1. Checkout the repository
+    - name: Checkout code
       uses: actions/checkout@v3
-
-    # Setup gcloud CLI
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v0'
+  
+    # 2. Authenticate with Google Cloud
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v1
       with:
-        credentials_json: '${{ secrets.GKE_SA_KEY }}'
-    # Get the GKE credentials so we can deploy to the cluster
-    - name: Set up GKE credentials
-      uses: google-github-actions/get-gke-credentials@v0
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+  
+    # 3. Set up Google Cloud SDK
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
       with:
-        cluster_name: ${{ secrets.GKE_CLUSTER }}
-        location: ${{ secrets.GKE_ZONE }}
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+  
+    # 4. Install GKE Auth Plugin
+    - name: Install GKE Auth Plugin
+      run: |
+        gcloud components install gke-gcloud-auth-plugin
   
     # 5. Authenticate with GKE
     - name: Authenticate with GKE
@@ -78,4 +84,3 @@ jobs:
         kubectl apply -f k8s/overlays/dev/backend
         kubectl apply -f k8s/overlays/dev/frontend
         kubectl apply -f k8s/overlays/dev/proxy
-
