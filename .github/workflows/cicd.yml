@@ -83,4 +83,4 @@ jobs:
       run: |
         kubectl apply -f k8s/overlays/dev/backend
         kubectl apply -f k8s/overlays/dev/frontend
-        kubectl apply -f k8s/overlays/dev/proxy
+        #kubectl apply -f k8s/overlays/dev/proxy
