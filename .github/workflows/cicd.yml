@@ -56,19 +56,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # 2. Set up Google Cloud SDK
+    # 2. Authenticate with Google Cloud
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v0
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+    # 3. Set up Google Cloud SDK
     - name: Set up GCP SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-    # 3. Authenticate with GKE
+    # 4. Authenticate with GKE
     - name: Authenticate with GKE
       run: |
         gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_ZONE }}
     
-    # 4. Apply Kubernetes manifests
+    # 5. Apply Kubernetes manifests
     - name: Apply Kubernetes manifests
       run: |
         kubectl apply -f k8s/overlays/dev/backend
