@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend-app
-        image: cesarvazquezmaypo/frontend-app:latest  # Cambia esto por tu imagen (por ejemplo, tuusuario/frontend-app:latest)
+        image: cesarvazquezmaypo/my-web:latest  # Cambia esto por tu imagen (por ejemplo, tuusuario/frontend-app:latest)
         ports:
         - containerPort: 5173
         env:  # Variables de entorno

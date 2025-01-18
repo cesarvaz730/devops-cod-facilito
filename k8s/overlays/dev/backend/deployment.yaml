@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend-api
-        image: cesarvazquezmaypo/backend-api:latest  # Imagen de Docker Hub
+        image: cesarvazquezmaypo/my-api:latest  # Imagen de Docker Hub
         ports:
         - containerPort: 5000  # Puerto en el que corre Flask (ajusta si es necesario)
         env:

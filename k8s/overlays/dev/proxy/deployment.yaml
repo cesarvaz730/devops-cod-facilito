@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-proxy-rox
+  labels:
+    app: nginx-proxy-rox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-proxy-rox
+  template:
+    metadata:
+      labels:
+        app: nginx-proxy-rox
+    spec:
+      containers:
+      - name: nginx-proxy-rox
+        image: cesarvazquezmaypo/my-proxy:latest
+        ports:
+        - containerPort: 80
