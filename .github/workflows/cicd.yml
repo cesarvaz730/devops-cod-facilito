@@ -89,7 +89,13 @@ jobs:
       run: |
         gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER_NAME }} --zone ${{ secrets.GKE_ZONE }}
 
-    # 6. Apply Kubernetes manifests
+    # 6. Set version tag
+    - name: Set Image Version
+      id: vars
+      run: echo "VERSION=$(date +'%Y%m%d')-${{ github.run_number }}" >> $GITHUB_ENV
+
+
+    # 7. Apply Kubernetes manifests
     - name: Apply Kubernetes manifests
       run: |
         kubectl set image deployment/backend-api-deployment backend-api=${{ secrets.DOCKER_USERNAME }}/my-api:${{ env.VERSION }}
