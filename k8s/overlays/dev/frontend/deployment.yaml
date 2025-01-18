@@ -18,7 +18,7 @@ spec:
       - name: frontend-app
         image: cesarvazquezmaypo/my-web:latest  # Cambia esto por tu imagen (por ejemplo, tuusuario/frontend-app:latest)
         ports:
-        - containerPort: 5173
+        - containerPort: 80
         env:  # Variables de entorno
         - name: VITE_HOST
           value: "0.0.0.0"

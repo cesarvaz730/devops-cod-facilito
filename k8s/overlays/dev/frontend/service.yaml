@@ -5,9 +5,9 @@ metadata:
   labels:
     app: frontend-app
 spec:
-  type: NodePort  # Cambia a ClusterIP si no necesitas exponerlo públicamente
+  type:  NodePort  # Cambia a ClusterIP si no necesitas exponerlo públicamente
   ports:
   - port: 80
-    targetPort: 5173  # Mapea el puerto del servicio al puerto del contenedor
+    targetPort: 80  # Mapea el puerto del servicio al puerto del contenedor
   selector:
     app: frontend-app
