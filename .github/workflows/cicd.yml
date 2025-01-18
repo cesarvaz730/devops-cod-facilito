@@ -94,4 +94,4 @@ jobs:
       run: |
         kubectl set image deployment/backend-api-deployment backend-api=${{ secrets.DOCKER_USERNAME }}/my-api:${{ env.VERSION }}
         kubectl set image deployment/frontend-app frontend-app=${{ secrets.DOCKER_USERNAME }}/my-web:${{ env.VERSION }}
-        kubectl set image deployment/nginx-proxy-rox nginx-proxy=${{ secrets.DOCKER_USERNAME }}/my-proxy:${{ env.VERSION }}
+        kubectl set image deployment/nginx-proxy-rox nginx-proxy-rox=${{ secrets.DOCKER_USERNAME }}/my-proxy:${{ env.VERSION }}
