@@ -84,3 +84,10 @@ jobs:
         kubectl apply -f k8s/overlays/dev/backend
         kubectl apply -f k8s/overlays/dev/frontend
         kubectl apply -f k8s/overlays/dev/proxy
+        
+    # 7. Force deployment update
+    - name: Force Deployment Update
+      run: |
+        kubectl patch deployment backend-api-deployment -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"lastUpdated\":\"$(date +'%s')\"}}}}}"
+        kubectl patch deployment frontend-app -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"lastUpdated\":\"$(date +'%s')\"}}}}}"
+        kubectl patch deployment nginx-proxy-rox -p "{\"spec\":{\"template\":{\"metadata\":{\"annotations\":{\"lastUpdated\":\"$(date +'%s')\"}}}}}"
