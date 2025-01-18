@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-proxy-rox-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "nginx-proxy-rox-ip"  # Nombre de la IP estática creada
+    #networking.gke.io/managed-certificates: "nginx-proxy-rox-cert"  # Para usar certificados gestionados (opcional)
+spec:
+  rules:
+  - host: "cesarvp.com"  # Cambia esto a tu dominio
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nginx-proxy-rox  # Nombre del servicio
+            port:
+              number: 8080         # Puerto del servicio
